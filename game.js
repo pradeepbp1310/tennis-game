@@ -3,9 +3,9 @@ const PADDLE_HEIGHT = 100;
 const PADDLE_THICKNESS = 10;
 const INTERVAL_TIME = 1000;
 let ballX = 50;
-let ballXSpeed = 5;
+let ballXSpeed = 10;
 let ballY = 50;
-let ballYSpeed = 5;
+let ballYSpeed = 10;
 let paddleY1 = 200;
 let paddleY2 = 200;
 let player1Score = 0;
@@ -37,6 +37,8 @@ function moveCanvas() {
     if (ballX < 0) {
         if (ballY > paddleY1 && ballY < paddleY1 + PADDLE_HEIGHT) {
             ballXSpeed = -ballXSpeed;
+            let deltaY = ballY - (paddleY1 + PADDLE_HEIGHT / 2);
+            ballYSpeed = deltaY * 0.15;
         } else {
             player2Score++;
             resetGame();
@@ -45,6 +47,8 @@ function moveCanvas() {
     if (ballX > canvas.width) {
         if (ballY > paddleY2 && ballY < paddleY2 + PADDLE_HEIGHT) {
             ballXSpeed = -ballXSpeed;
+            let deltaY = ballY - (paddleY2 + PADDLE_HEIGHT / 2);
+            ballYSpeed = deltaY * 0.15;
         } else {
             player1Score++;
             resetGame();
