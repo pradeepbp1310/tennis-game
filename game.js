@@ -6,7 +6,8 @@ let ballX = 50;
 let ballXSpeed = 5;
 let ballY = 50;
 let ballYSpeed = 5;
-let paddleY1 = 0;
+let paddleY1 = 200;
+let paddleY2 = 200;
 
 window.onload = function () {
     let framePerSecond = 30;
@@ -28,6 +29,7 @@ window.onload = function () {
 
 // Canvas in action - move everything
 function moveCanvas() {
+    computerPlayerMove();
     ballX += ballXSpeed;
     ballY += ballYSpeed;
     if (ballX < 0) {
@@ -51,6 +53,8 @@ function drawAllCanvas() {
     ballCanvas();
     // Player 1 paddle
     createCanvas(0, paddleY1, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
+    // Player 1 paddle
+    createCanvas(canvas.width - PADDLE_THICKNESS, paddleY2, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 }
 
 function createCanvas(x, y, width, height, color) {
@@ -75,5 +79,16 @@ function calculateMousePosition(evt) {
     return {
         x: mouseX,
         y: mouseY
+    }
+}
+
+// Mover computer player2 own their own
+function computerPlayerMove() {
+    let paddleY2Center = paddleY2 + (PADDLE_HEIGHT / 2);
+    if (paddleY2Center < ballY - 20) {
+        paddleY2 += 5;
+    }
+    if (paddleY2Center > ballY + 20) {
+        paddleY2 -= 5;
     }
 }
