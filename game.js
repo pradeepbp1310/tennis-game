@@ -33,7 +33,11 @@ function moveCanvas() {
     ballX += ballXSpeed;
     ballY += ballYSpeed;
     if (ballX < 0) {
-        ballXSpeed = -ballXSpeed;
+        if (ballY > paddleY1 && ballY < paddleY1 + PADDLE_HEIGHT) {
+            ballXSpeed = -ballXSpeed;
+        } else {
+            resetGame();
+        }
     }
     if (ballX > canvas.width) {
         ballXSpeed = - ballXSpeed
@@ -91,4 +95,12 @@ function computerPlayerMove() {
     if (paddleY2Center > ballY + 20) {
         paddleY2 -= 5;
     }
+}
+
+// Reset the game
+function resetGame() {
+    ballXSpeed = -ballXSpeed;
+    ballYSpeed = -ballYSpeed;
+    ballX = canvas.width / 2;
+    ballY = canvas.height / 2;
 }
