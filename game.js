@@ -8,6 +8,8 @@ let ballY = 50;
 let ballYSpeed = 5;
 let paddleY1 = 200;
 let paddleY2 = 200;
+let player1Score = 0;
+let player2Score = 0;
 
 window.onload = function () {
     let framePerSecond = 30;
@@ -36,11 +38,17 @@ function moveCanvas() {
         if (ballY > paddleY1 && ballY < paddleY1 + PADDLE_HEIGHT) {
             ballXSpeed = -ballXSpeed;
         } else {
+            player2Score++;
             resetGame();
         }
     }
     if (ballX > canvas.width) {
-        ballXSpeed = - ballXSpeed
+        if (ballY > paddleY2 && ballY < paddleY2 + PADDLE_HEIGHT) {
+            ballXSpeed = -ballXSpeed;
+        } else {
+            player1Score++;
+            resetGame();
+        }
     }
     if (ballY < 0) {
         ballYSpeed = -ballYSpeed;
@@ -59,6 +67,10 @@ function drawAllCanvas() {
     createCanvas(0, paddleY1, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
     // Player 1 paddle
     createCanvas(canvas.width - PADDLE_THICKNESS, paddleY2, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
+    // Player 1 score
+    canvasContext.fillText('Score: ' + player1Score, 200, 100);
+    canvasContext.fillText('Score: ' + player2Score, canvas.width - 200, 100);
+
 }
 
 function createCanvas(x, y, width, height, color) {
